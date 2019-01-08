@@ -1,0 +1,75 @@
+:host {
+    div.page {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        div.header {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            color: #333;
+            font-weight: 700;
+            &>.progress {
+                position: fixed;
+                top: 0;
+            }
+        }
+        div.content {
+            flex: 1 1 0;
+            width: 100%;
+            position: relative;
+            div.mend {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                padding: 1.5rem 1.5rem;
+                div.invitor {
+                    width: 5rem;
+                    height: 5rem;
+                    border-radius: 2.5rem;
+                    border: 2px solid #E9E9E9;
+                    margin: auto;
+                    &>img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 2.5rem;
+                    }
+                }
+                p.invitor {
+                    margin-top: .6rem;
+                    font-size: 14px;
+                    color: #C1C1C1;
+                    text-align: center;
+                }
+                div.form {
+                    width: 100%;
+                    form {
+                        display: block;
+                        width: 100%;
+                        &>* {
+                            width: 100%;
+                        }
+                    }
+                }
+                div.bscar {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: flex-end;
+                }
+            }
+        }
+        div.footer {
+            width: 100%;
+            height: 50px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            flex-flow: row;
+            justify-content: space-between;
+            padding: 0 .5rem;
+        }
+    }
+}

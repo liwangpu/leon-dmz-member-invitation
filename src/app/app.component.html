@@ -1,0 +1,91 @@
+<div class="page">
+
+    <div class="header">
+        <p>会员资料填写</p>
+        <mat-progress-bar class="progress" mode="indeterminate" *ngIf='submiting'></mat-progress-bar>
+    </div>
+
+    <div class="content">
+        <div class="mend">
+            <div class="invitor">
+                <img [src]="inviterAvatar">
+            </div>
+            <p class="invitor">来自&nbsp;{{inviterName}}&nbsp;的邀请</p>
+            <div class="form">
+                <form name="detailForm" [formGroup]="detailForm">
+                    <input type="hidden" formControlName='inviter' name='inviter'>
+
+                    <mat-form-field>
+                        <input matInput name="name" formControlName="name" placeholder="姓名" required>
+                        <mat-error *ngIf="!detailForm.controls['name'].valid">
+                            姓名为必填信息
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput name="mail" formControlName="mail" placeholder="邮件" required>
+                        <mat-error *ngIf="!detailForm.controls['mail'].valid">
+                            {{detailForm.controls['mail'].hasError('required')?'邮箱为必填信息':'邮箱格式不规范'}}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput name="phone" formControlName="phone" placeholder="电话" required>
+                        <mat-error *ngIf="!detailForm.controls['phone'].valid">
+                            电话为必填信息
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput name="province" [formControl]="provinceControl" [matAutocomplete]="provinceAuto"
+                            required placeholder="省">
+                        <mat-autocomplete #provinceAuto="matAutocomplete" [displayWith]="proviceDisplayFn"
+                            (optionSelected)='onProvinceSelect($event)'>
+                            <mat-option *ngFor="let option of proviceOptions | async" [value]="option">
+                                {{option.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput name="city" [formControl]="cityControl" [matAutocomplete]="cityAuto" required
+                            placeholder="市">
+                        <mat-autocomplete #cityAuto="matAutocomplete" [displayWith]="cityDisplayFn" (optionSelected)='onCitySelect($event)'>
+                            <mat-option *ngFor="let option of cityOptions" [value]="option">
+                                {{option.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput name="company" formControlName="company" placeholder="公司">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <textarea matInput placeholder="Textarea" name="remark" formControlName="remark" placeholder="备注"></textarea>
+                        <mat-error *ngIf="detailForm.get('remark').hasError('maxlength')">
+                            备注信息长度应该小于200个字符
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="bscar">
+                <button mat-button (click)='reset()'>
+                    <mat-icon>picture_in_picture</mat-icon>
+                    <span>&nbsp;名片上传</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button mat-button [disabled]='!detailForm.dirty' (click)='reset()'>
+            <mat-icon>replay</mat-icon>
+            <span>重置</span>
+        </button>
+        <button mat-button [disabled]='!detailForm.valid' (click)='submit()' #submitCt>
+            <mat-icon>done</mat-icon>
+            <span>提交</span>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: "roboto", "Microsoft YaHei", "黑体", "宋体", "sans-serif";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
