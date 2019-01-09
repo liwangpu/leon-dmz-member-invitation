@@ -2,13 +2,15 @@
   "name": "member-invitation",
   "version": "0.0.0",
   "scripts": {
+    "config": "node config.js",
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "e2e": "ng e2e",
     "dev": "ng serve --configuration=development --host 0.0.0.0",
-    "build-dev": "ng build --configuration=development",
-    "build-prod": "ng build --configuration=production --aot --prod "
+    "build:dev": "ng build --configuration=development",
+    "build:prod": "ng build --configuration=production --aot --prod ",
+    "server:prod":"http-server dist/member-invitation"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +31,7 @@
     "@ngx-translate/http-loader": "3.0.1",
     "core-js": "~2.5.4",
     "hammerjs": "~2.0.8",
+    "http-server": "^0.11.1",
     "material-design-icons": "3.0.1",
     "rxjs": "~6.3.0",
     "rxjs-compat": "6.2.1",
