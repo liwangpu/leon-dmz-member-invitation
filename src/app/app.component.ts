@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatBottomSheet, MatAutocompleteSelectedEvent, MatSnackBar, MatButton } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from "@env/environment";
-import { map, tap, debounceTime, catchError } from 'rxjs/operators';
+import { map, tap, debounceTime, catchError, switchMap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   inviterId: string;
   inviterAvatar: string = '/assets/icons/cool-boy.jpg';
   inviterName: string = '管理员';
+  bsUrl: string;
   provinceControl = new FormControl();
   cityControl = new FormControl();
   detailForm: FormGroup;
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
   refCities: Array<NationalUrban> = [];
   requestHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
   @ViewChild('submitCt') submitCt: MatButton;
+  @ViewChild('fileInputCt') fileInputCt: ElementRef;
   constructor(protected formBuilder: FormBuilder, protected bottomSheet: MatBottomSheet, protected route: ActivatedRoute, protected httpClient: HttpClient, protected snackBar: MatSnackBar) {
     this.detailForm = this.formBuilder.group({
       inviter: ['', [Validators.required]],
@@ -45,7 +47,8 @@ export class AppComponent implements OnInit {
       remark: ['', [Validators.maxLength(200)]],
       phone: ['', [Validators.required]],
       province: ['', [Validators.required]],
-      city: ['', [Validators.required]]
+      city: ['', [Validators.required]],
+      businessCard: ['', [Validators.required]]
     });
   }//constructor
 
@@ -141,6 +144,7 @@ export class AppComponent implements OnInit {
   reset() {
     this.provinceControl.reset();
     this.cityControl.reset();
+    this.clearFile();
     this.detailForm.reset();
     this.detailForm.patchValue({ inviter: this.inviterId });
   }//reset
@@ -148,17 +152,29 @@ export class AppComponent implements OnInit {
   submit() {
     this.submiting = true;
     this.submitCt.disabled = true;
-    let data = this.detailForm.value;
 
-    let submit$ = this.httpClient.post(`${environment.serveBase}/MemberRegistry`, data, { headers: this.requestHeader });
+    let fusData = this.getBSCardFormData();
 
-    submit$.pipe(map(() => "提交成功")).pipe(catchError(() => of('提交失败,请稍后再试'))).subscribe(msg => {
-      this.submiting = false;
-      this.submitCt.disabled = false;
-      this.snackBar.open(msg, '', {
-        duration: 2000,
-      });
-    });//subscribe
+    let uploadBSCard$ = this.httpClient.post(`${environment.serveBase}/files/UploadAttachment`, fusData.formData, { headers: fusData.header })
+    // let submit$ = this.httpClient.post(`${environment.serveBase}/MemberRegistry`, data, { headers: this.requestHeader });
+
+    uploadBSCard$
+      .pipe(switchMap(x => {
+        let data = this.detailForm.value;
+        data['businessCard'] = x['id'];
+        return this.httpClient.post(`${environment.serveBase}/MemberRegistry`, data, { headers: this.requestHeader });;
+      }))
+      .pipe(map(() => "提交成功")).pipe(catchError((err) => {
+        console.log(err);
+        return of('提交失败,请稍后再试');
+      }))
+      .subscribe(msg => {
+        this.submiting = false;
+        this.submitCt.disabled = false;
+        this.snackBar.open(msg, '', {
+          duration: 2000,
+        });
+      });//subscribe);
   }//submit
 
   changeUrban() {
@@ -179,5 +195,48 @@ export class AppComponent implements OnInit {
   getUbrnById(id: string) {
     return this.httpClient.get<NationalUrban>(`${environment.serveBase}/NationalUrban/${id}`, { headers: this.requestHeader });
   }//getUbrnById
+
+  onFileChange(event: any) {
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = (e: any) => {
+        this.bsUrl = e.target.result;
+        //填入一个虚拟的值,让表单验证通过
+        this.detailForm.patchValue({ businessCard: 'true' });
+      };
+    }
+    else {
+      this.detailForm.patchValue({ businessCard: null });
+    }
+  }//onFileChange
+
+  clearFile() {
+    this.bsUrl = undefined;
+    this.detailForm.patchValue({ businessCard: null });
+    this.fileInputCt.nativeElement.value = '';
+  }//clearFile
+
+  selectBSCard() {
+    this.clearFile();
+    this.fileInputCt.nativeElement.click();
+  }//selectICon
+
+  getBSCardFormData(): { formData: FormData, header: HttpHeaders } {
+    let fileBrowser = this.fileInputCt.nativeElement;
+    if (fileBrowser.files && fileBrowser.files[0]) {
+      let formData = new FormData();
+      let file = fileBrowser.files[0];
+      let idx = file.name.lastIndexOf('.');
+      let fileExt = file.name.substring(idx, file.name.length);
+      let header = new HttpHeaders({
+        "fileExt": fileExt
+      });
+      formData.append("file", file);
+      return { formData: formData, header: header };
+    }
+    return { formData: null, header: null };
+  }//getIconFormData
 
 }
