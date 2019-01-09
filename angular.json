@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "leon-angular-app-scaffold": {
+    "member-invitation": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/leon-angular-app-scaffold",
+            "outputPath": "dist/member-invitation",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,23 +70,6 @@
                   "with": "src/environments/environment.dev.ts"
                 }
               ]
-            },
-            "kenn": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.kenn.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
             }
           }
         },
@@ -94,21 +77,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 8889,
-            "browserTarget": "leon-angular-app-scaffold:build"
+            "browserTarget": "member-invitation:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "leon-angular-app-scaffold:build:production"
+              "browserTarget": "member-invitation:build:production"
             },
             "development": {
-              "browserTarget": "leon-angular-app-scaffold:build:development"
+              "browserTarget": "member-invitation:build:development"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "leon-angular-app-scaffold:build"
+            "browserTarget": "member-invitation:build"
           }
         },
         "test": {
@@ -142,7 +125,7 @@
         }
       }
     },
-    "leon-angular-app-scaffold-e2e": {
+    "member-invitation-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -151,11 +134,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "leon-angular-app-scaffold:serve"
+            "devServerTarget": "member-invitation:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "leon-angular-app-scaffold:serve:production"
+              "devServerTarget": "member-invitation:serve:production"
             }
           }
         },
@@ -169,427 +152,7 @@
           }
         }
       }
-    },
-    "@geek/micro-base": {
-      "root": "projects/geek/micro-base",
-      "sourceRoot": "projects/geek/micro-base/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/micro-base/tsconfig.lib.json",
-            "project": "projects/geek/micro-base/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/micro-base/src/test.ts",
-            "tsConfig": "projects/geek/micro-base/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/micro-base/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/micro-base/tsconfig.lib.json",
-              "projects/geek/micro-base/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/micro-app-base": {
-      "root": "projects/geek/micro-app-base",
-      "sourceRoot": "projects/geek/micro-app-base/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/micro-app-base/tsconfig.lib.json",
-            "project": "projects/geek/micro-app-base/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/micro-app-base/src/test.ts",
-            "tsConfig": "projects/geek/micro-app-base/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/micro-app-base/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/micro-app-base/tsconfig.lib.json",
-              "projects/geek/micro-app-base/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/scaffold-mat-bcl": {
-      "root": "projects/geek/scaffold-mat-bcl",
-      "sourceRoot": "projects/geek/scaffold-mat-bcl/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/scaffold-mat-bcl/tsconfig.lib.json",
-            "project": "projects/geek/scaffold-mat-bcl/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/scaffold-mat-bcl/src/test.ts",
-            "tsConfig": "projects/geek/scaffold-mat-bcl/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/scaffold-mat-bcl/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/scaffold-mat-bcl/tsconfig.lib.json",
-              "projects/geek/scaffold-mat-bcl/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/scaffold-ng-bcl": {
-      "root": "projects/geek/scaffold-ng-bcl",
-      "sourceRoot": "projects/geek/scaffold-ng-bcl/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/scaffold-ng-bcl/tsconfig.lib.json",
-            "project": "projects/geek/scaffold-ng-bcl/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/scaffold-ng-bcl/src/test.ts",
-            "tsConfig": "projects/geek/scaffold-ng-bcl/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/scaffold-ng-bcl/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/scaffold-ng-bcl/tsconfig.lib.json",
-              "projects/geek/scaffold-ng-bcl/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/scaffold-page-plate": {
-      "root": "projects/geek/scaffold-page-plate",
-      "sourceRoot": "projects/geek/scaffold-page-plate/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/scaffold-page-plate/tsconfig.lib.json",
-            "project": "projects/geek/scaffold-page-plate/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/scaffold-page-plate/src/test.ts",
-            "tsConfig": "projects/geek/scaffold-page-plate/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/scaffold-page-plate/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/scaffold-page-plate/tsconfig.lib.json",
-              "projects/geek/scaffold-page-plate/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/scaffold-app-core": {
-      "root": "projects/geek/scaffold-app-core",
-      "sourceRoot": "projects/geek/scaffold-app-core/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/scaffold-app-core/tsconfig.lib.json",
-            "project": "projects/geek/scaffold-app-core/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/scaffold-app-core/src/test.ts",
-            "tsConfig": "projects/geek/scaffold-app-core/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/scaffold-app-core/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/scaffold-app-core/tsconfig.lib.json",
-              "projects/geek/scaffold-app-core/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/micro-dmz-hd": {
-      "root": "projects/geek/micro-dmz-hd",
-      "sourceRoot": "projects/geek/micro-dmz-hd/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/micro-dmz-hd/tsconfig.lib.json",
-            "project": "projects/geek/micro-dmz-hd/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/micro-dmz-hd/src/test.ts",
-            "tsConfig": "projects/geek/micro-dmz-hd/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/micro-dmz-hd/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/micro-dmz-hd/tsconfig.lib.json",
-              "projects/geek/micro-dmz-hd/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/scaffold-app-minor": {
-      "root": "projects/geek/scaffold-app-minor",
-      "sourceRoot": "projects/geek/scaffold-app-minor/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/scaffold-app-minor/tsconfig.lib.json",
-            "project": "projects/geek/scaffold-app-minor/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/scaffold-app-minor/src/test.ts",
-            "tsConfig": "projects/geek/scaffold-app-minor/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/scaffold-app-minor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/scaffold-app-minor/tsconfig.lib.json",
-              "projects/geek/scaffold-app-minor/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/apps-designer": {
-      "root": "projects/geek/apps-designer",
-      "sourceRoot": "projects/geek/apps-designer/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/apps-designer/tsconfig.lib.json",
-            "project": "projects/geek/apps-designer/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/apps-designer/src/test.ts",
-            "tsConfig": "projects/geek/apps-designer/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/apps-designer/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/apps-designer/tsconfig.lib.json",
-              "projects/geek/apps-designer/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/apps-base": {
-      "root": "projects/geek/apps-base",
-      "sourceRoot": "projects/geek/apps-base/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/apps-base/tsconfig.lib.json",
-            "project": "projects/geek/apps-base/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/apps-base/src/test.ts",
-            "tsConfig": "projects/geek/apps-base/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/apps-base/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/apps-base/tsconfig.lib.json",
-              "projects/geek/apps-base/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/micro-app-basic": {
-      "root": "projects/geek/micro-app-basic",
-      "sourceRoot": "projects/geek/micro-app-basic/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/micro-app-basic/tsconfig.lib.json",
-            "project": "projects/geek/micro-app-basic/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/micro-app-basic/src/test.ts",
-            "tsConfig": "projects/geek/micro-app-basic/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/micro-app-basic/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/micro-app-basic/tsconfig.lib.json",
-              "projects/geek/micro-app-basic/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "@geek/micro-dmz-oms": {
-      "root": "projects/geek/micro-dmz-oms",
-      "sourceRoot": "projects/geek/micro-dmz-oms/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/geek/micro-dmz-oms/tsconfig.lib.json",
-            "project": "projects/geek/micro-dmz-oms/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/geek/micro-dmz-oms/src/test.ts",
-            "tsConfig": "projects/geek/micro-dmz-oms/tsconfig.spec.json",
-            "karmaConfig": "projects/geek/micro-dmz-oms/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/geek/micro-dmz-oms/tsconfig.lib.json",
-              "projects/geek/micro-dmz-oms/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
-  "defaultProject": "leon-angular-app-scaffold"
+  "defaultProject": "member-invitation"
 }

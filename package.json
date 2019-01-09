@@ -1,14 +1,14 @@
 {
-  "name": "leon-angular-app-scaffold",
+  "name": "member-invitation",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "e2e": "ng e2e",
-    "kenn": "ng serve --configuration=kenn --host 0.0.0.0",
     "dev": "ng serve --configuration=development --host 0.0.0.0",
-    "b-dev": "ng build --configuration=production --aot  --prod "
+    "build-dev": "ng build --configuration=development",
+    "build-prod": "ng build --configuration=production --aot --prod "
   },
   "private": true,
   "dependencies": {
